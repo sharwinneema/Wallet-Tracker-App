@@ -4,15 +4,123 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FCDECD90"
     tools:context=".WalletActivity">
 
+
   <TextView
+      android:id="@+id/tv_instructions"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Hello World!"
-      app:layout_constraintBottom_toBottomOf="parent"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="100dp"
+      android:layout_marginEnd="16dp"
+      android:text="Click the die to roll. You earn 5 coins every time you roll a six!"
+      android:textAlignment="center"
+      android:textColor="#00AC07"
+      android:textSize="16sp"
+      app:layout_constraintBottom_toTopOf="@+id/tv_instructions_2"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.5"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+      android:id="@+id/tv_instructions_2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:text="If you roll two sixes in a row, you will get 10 coins!"
+      android:textAlignment="center"
+      android:textColor="#00AC07"
+      android:textSize="16sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tv_instructions" />
+
+  <TextView
+      android:id="@+id/tv_instructions_3"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:text="But if you roll any other number in a row, you lose 5 coins!"
+      android:textAlignment="center"
+      android:textColor="#EB0D0D"
+      android:textSize="16sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tv_instructions_2" />
+
+  <!-- Coins -->
+
+
+  <!-- Die roll display (Centered) -->
+
+  <!-- Previous Roll -->
+  <TextView
+      android:id="@+id/tv_coins"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:text="Coins: 40"
+      android:textAlignment="center"
+      android:textSize="18sp"
+      android:textStyle="bold"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.498"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tv_instructions_3" />
+
+  <TextView
+      android:id="@+id/tv_die_roll"
+      android:layout_width="120dp"
+      android:layout_height="120dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginBottom="16dp"
+      android:background="#8000FF"
+      android:gravity="center"
+      android:text="4"
+      android:textColor="#FFFFFF"
+      android:textSize="60sp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.498"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tv_coins"
+      app:layout_constraintVertical_bias="0.193" />
+
+  <TextView
+      android:id="@+id/tv_previous_roll"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="12dp"
+      android:text="Previous Roll: 4"
+      android:textSize="16sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tv_die_roll" />
+
+  <!-- Stats -->
+  <TextView
+      android:id="@+id/tv_stats"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="Sixes Rolled: 3    Total Dice Rolls: 11"
+      android:textSize="14sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tv_previous_roll" />
+
+  <TextView
+      android:id="@+id/tv_double_stats"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="Double Sixes: 3    Double Others: 1"
+      android:textSize="14sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tv_stats" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
