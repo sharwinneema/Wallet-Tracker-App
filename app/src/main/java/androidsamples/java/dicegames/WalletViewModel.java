@@ -10,17 +10,19 @@ public class WalletViewModel extends ViewModel {
   private   int score;
   private   int number_of_sixes;
   private int number_of_double_sixes;
-  private int number_of_double_roles;
-  private int flag;
+  private int number_of_double_others;
+  private int previous_role;
   private Die6 die;
+  private int total_roles;
 
   public WalletViewModel() {
       this.score=0;
-      this.number_of_double_roles=0;
+      this.number_of_double_others=0;
       this.number_of_double_sixes=0;
       this.number_of_sixes=0;
-      this.flag=-1;
+      this.previous_role=-1;
       this.die=new Die6();
+      this.total_roles=totalRolls();
   }
 
   /**
@@ -36,6 +38,28 @@ public class WalletViewModel extends ViewModel {
    */
   public void rollDie() {
       die.roll();
+      int currentRoll=this.die.value();
+      if (currentRoll == 6) {
+        // If the roll is 6, check if the previous roll was also 6
+        if (this.previous_role == 6) {
+          // Double sixes in a row
+          this.score += 10;
+          this.number_of_double_sixes++;
+        } else {
+          // Single six
+          this.score += 5;
+          this.number_of_sixes++;
+        }
+      } else {
+        // For other numbers, check if it was rolled twice consecutively
+        if (currentRoll == this.previous_role) {
+          this.score -= 5; // Lose 5 coins
+          this.number_of_double_others++;
+        }
+      }
+
+      // Update the previous roll
+      this.previous_role = currentRoll;
   }
 
   /**
@@ -43,8 +67,9 @@ public class WalletViewModel extends ViewModel {
    *
    */
   public int dieValue() {
-    // TODO implement method
-    return 0;
+    int val =this.die.value();
+    return  val;
+
   }
 
   /**
@@ -53,7 +78,7 @@ public class WalletViewModel extends ViewModel {
    */
   public int singleSixes() {
     // TODO implement method
-    return 0;
+    return this.number_of_sixes;
   }
 
   /**
@@ -62,7 +87,7 @@ public class WalletViewModel extends ViewModel {
    */
   public int totalRolls() {
     // TODO implement method
-    return 0;
+    return this.total_roles;
   }
 
   /**
@@ -70,8 +95,7 @@ public class WalletViewModel extends ViewModel {
    *
    */
   public int doubleSixes() {
-    // TODO implement method
-    return 0;
+    return this.number_of_double_sixes;
   }
 
   /**
@@ -79,8 +103,7 @@ public class WalletViewModel extends ViewModel {
    *
    */
   public int doubleOthers() {
-    // TODO implement method
-    return 0;
+    return this.number_of_double_others;
   }
 
   /**
@@ -88,7 +111,6 @@ public class WalletViewModel extends ViewModel {
    *
    */
   public int previousRoll() {
-    // TODO implement method
-    return 0;
+    return this.previous_role;
   }
 }
