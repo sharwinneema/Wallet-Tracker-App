@@ -7,8 +7,20 @@ public class WalletViewModel extends ViewModel {
   /**
    * The no argument constructor.
    */
+  private   int score;
+  private   int number_of_sixes;
+  private int number_of_double_sixes;
+  private int number_of_double_roles;
+  private int flag;
+  private Die6 die;
+
   public WalletViewModel() {
-    // TODO implement method
+      this.score=0;
+      this.number_of_double_roles=0;
+      this.number_of_double_sixes=0;
+      this.number_of_sixes=0;
+      this.flag=-1;
+      this.die=new Die6();
   }
 
   /**
@@ -16,15 +28,14 @@ public class WalletViewModel extends ViewModel {
    *
    */
   public int balance() {
-    // TODO implement method
-    return 0;
+    return score;
   }
 
   /**
    * Rolls the {@link Die} in the wallet and implements the changes accordingly.
    */
   public void rollDie() {
-    // TODO implement method
+      die.roll();
   }
 
   /**
