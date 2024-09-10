@@ -44,6 +44,9 @@ public class WalletActivity extends AppCompatActivity {
       if (viewModel.hasEarnedCoins()) {
         Toast.makeText(this, R.string.congratulations, Toast.LENGTH_SHORT).show();
       }
+      if (viewModel.hasLossCoins()) {
+        Toast.makeText(this, R.string.loss_message, Toast.LENGTH_SHORT).show();
+      }
     });
   }
 

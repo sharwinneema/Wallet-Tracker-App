@@ -5,4 +5,5 @@
   <string name="stats_label">Sixes Rolled: %1$d    Total Dice Rolls: %2$d</string>
   <string name="double_stats_label">Double Sixes: %1$d    Double Others: %2$d</string>
   <string name="congratulations">Congratulations! You earned coins!</string>
+  <string name="loss_message">Oops! You lost some coins. Better luck next time!</string>
 </resources>
