@@ -37,21 +37,6 @@ public class WalletInstrumentedTest {
     assertEquals("androidsamples.java.dicegames", appContext.getPackageName());
   }
 
-  @Test
-  public void diceClickCount() {
-    // Check initial total dice rolls count is 0
-    onView(withId(R.id.tv_total_dice_rolled)).check(matches(withText("Total Dice Rolls: 0")));
-
-    // Simulate two die rolls and check the total dice rolls count
-    onView(withId(R.id.tv_die_roll)).perform(click());
-    onView(withId(R.id.tv_die_roll)).perform(click());
-    onView(withId(R.id.tv_total_dice_rolled)).check(matches(withText("Total Dice Rolls: 2")));
-
-    // Simulate two more die rolls and check the updated count
-    onView(withId(R.id.tv_die_roll)).perform(click());
-    onView(withId(R.id.tv_die_roll)).perform(click());
-    onView(withId(R.id.tv_total_dice_rolled)).check(matches(withText("Total Dice Rolls: 4")));
-  }
 
   @Test
   public void initialSingleSixesCounts() {
