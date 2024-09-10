@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import android.widget.Toast;
+
 
 public class WalletActivity extends AppCompatActivity {
 
@@ -38,6 +40,10 @@ public class WalletActivity extends AppCompatActivity {
     tvDieRoll.setOnClickListener(v -> {
       viewModel.rollDie(); // Roll the die
       updateUI(); // Update the UI after rolling
+
+      if (viewModel.hasEarnedCoins()) {
+        Toast.makeText(this, R.string.congratulations, Toast.LENGTH_SHORT).show();
+      }
     });
   }
 

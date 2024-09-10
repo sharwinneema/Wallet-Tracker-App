@@ -14,6 +14,7 @@ public class WalletViewModel extends ViewModel {
   private int previous_role;
   private Die6 die;
   private int total_roles;
+  private boolean earnedCoins;
 
   public WalletViewModel() {
       this.score=0;
@@ -23,6 +24,7 @@ public class WalletViewModel extends ViewModel {
       this.previous_role=-1;
       this.die=new Die6();
       this.total_roles=totalRolls();
+      this.earnedCoins=false;
   }
 
   /**
@@ -46,14 +48,17 @@ public class WalletViewModel extends ViewModel {
           // Double sixes in a row
           this.score += 10;
           this.number_of_double_sixes++;
+          this.earnedCoins=true;
         } else {
           // Single six
           this.score += 5;
           this.number_of_sixes++;
+          this.earnedCoins=true;
         }
       } else {
         // For other numbers, check if it was rolled twice consecutively
-        if (currentRoll == this.previous_role) {
+          this.earnedCoins=false;
+          if (currentRoll == this.previous_role) {
           this.score -= 5; // Lose 5 coins
           this.number_of_double_others++;
         }
@@ -117,6 +122,12 @@ public class WalletViewModel extends ViewModel {
 
   public  void  setpreviosRoll(int val){
         this.previous_role=val;
+    }
+
+    public boolean hasEarnedCoins() {
+        boolean result = earnedCoins;
+        earnedCoins = false; // Reset flag after checking
+        return result;
     }
 
 }
