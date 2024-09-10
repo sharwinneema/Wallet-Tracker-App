@@ -39,6 +39,7 @@ public class WalletViewModel extends ViewModel {
   public void rollDie() {
       die.roll();
       int currentRoll=this.die.value();
+      total_roles++;
       if (currentRoll == 6) {
         // If the roll is 6, check if the previous roll was also 6
         if (this.previous_role == 6) {

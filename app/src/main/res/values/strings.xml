@@ -1,3 +1,7 @@
 <resources>
   <string name="app_name">Dice Games</string>
+  <string name="coins_label">Coins: %1$d</string>
+  <string name="previous_roll_label">Previous Roll: %1$d</string>
+  <string name="stats_label">Sixes Rolled: %1$d    Total Dice Rolls: %2$d</string>
+  <string name="double_stats_label">Double Sixes: %1$d    Double Others: %2$d</string>
 </resources>
