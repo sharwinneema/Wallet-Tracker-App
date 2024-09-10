@@ -114,4 +114,9 @@ public class WalletViewModel extends ViewModel {
   public int previousRoll() {
     return this.previous_role;
   }
+
+  public  void  setpreviosRoll(int val){
+        this.previous_role=val;
+    }
+
 }

@@ -49,15 +49,14 @@ public class WalletTest {
   @Test
   public void rollDie_doubleNonSix_losesFiveCoins() {
     // Simulate rolling any number other than six twice in a row
-    walletViewModel.rollDie();
-    int firstRoll = walletViewModel.dieValue();
+    while(true){
+        walletViewModel.setpreviosRoll(5);
+        int score=walletViewModel.balance();
+        walletViewModel.rollDie();
 
-    if (firstRoll != 6) {
-      walletViewModel.rollDie();
-      int secondRoll = walletViewModel.dieValue();
-
-      if (secondRoll == firstRoll) {
-        assertEquals(-5, walletViewModel.balance());
+        if(walletViewModel.dieValue()==5){
+          assertEquals(score-5,walletViewModel.balance());
+          break;
       }
     }
   }
@@ -84,22 +83,27 @@ public class WalletTest {
 
   @Test
   public void test_singleSixes_incrementsCorrectly() {
-    walletViewModel.rollDie();
-    if (walletViewModel.dieValue() == 6) {
-      assertEquals(1, walletViewModel.singleSixes());
+    while(true) {
+      walletViewModel.rollDie();
+      if (walletViewModel.dieValue() == 6) {
+        assertEquals(1, walletViewModel.singleSixes());
+        break;
+      }
     }
   }
 
   @Test
   public void test_doubleSixes_incrementsCorrectly() {
-    walletViewModel.rollDie();
-    if (walletViewModel.dieValue() == 6) {
-      walletViewModel.rollDie();
-      if (walletViewModel.dieValue() == 6) {
-        assertEquals(1, walletViewModel.doubleSixes());
+    while(true){
+        walletViewModel.rollDie();
+        walletViewModel.setpreviosRoll(6);
+        if (walletViewModel.dieValue() == 6) {
+          assertEquals(1, walletViewModel.doubleSixes());
+          break;
+        }
       }
     }
-  }
+
 
   @Test
   public void test_doubleOthers_incrementsCorrectly() {
