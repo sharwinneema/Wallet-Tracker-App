@@ -95,8 +95,9 @@ public class WalletTest {
   @Test
   public void test_doubleSixes_incrementsCorrectly() {
     while(true){
-        walletViewModel.rollDie();
         walletViewModel.setpreviosRoll(6);
+        walletViewModel.rollDie();
+
         if (walletViewModel.dieValue() == 6) {
           assertEquals(1, walletViewModel.doubleSixes());
           break;

@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import android.widget.Toast;
 
-
 public class WalletActivity extends AppCompatActivity {
 
   private WalletViewModel viewModel;
@@ -15,8 +14,10 @@ public class WalletActivity extends AppCompatActivity {
   private TextView tvCoins;
   private TextView tvDieRoll;
   private TextView tvPreviousRoll;
-  private TextView tvStats;
-  private TextView tvDoubleStats;
+  private TextView tvSixesRolled;
+  private TextView tvTotalDiceRolled;
+  private TextView tvDoubleSixes;
+  private TextView tvDoubleOthers;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +31,10 @@ public class WalletActivity extends AppCompatActivity {
     tvCoins = findViewById(R.id.tv_coins);
     tvDieRoll = findViewById(R.id.tv_die_roll);
     tvPreviousRoll = findViewById(R.id.tv_previous_roll);
-    tvStats = findViewById(R.id.tv_stats);
-    tvDoubleStats = findViewById(R.id.tv_double_stats);
+    tvSixesRolled = findViewById(R.id.tv_sixes_rolled);
+    tvTotalDiceRolled = findViewById(R.id.tv_total_dice_rolled);
+    tvDoubleSixes = findViewById(R.id.tv_double_sixes);
+    tvDoubleOthers = findViewById(R.id.tv_double_others);
 
     // Set initial values for UI from ViewModel
     updateUI();
@@ -64,10 +67,11 @@ public class WalletActivity extends AppCompatActivity {
     tvPreviousRoll.setText(getString(R.string.previous_roll_label, viewModel.previousRoll()));
 
     // Update the stats for sixes rolled and total dice rolls
-    tvStats.setText(getString(R.string.stats_label, viewModel.singleSixes(), viewModel.totalRolls()));
+    tvSixesRolled.setText(getString(R.string.sixes_rolled_label, viewModel.singleSixes()));
+    tvTotalDiceRolled.setText(getString(R.string.total_dice_rolled_label, viewModel.totalRolls()));
 
     // Update the stats for double sixes and double other numbers
-    tvDoubleStats.setText(getString(R.string.double_stats_label, viewModel.doubleSixes(), viewModel.doubleOthers()));
+    tvDoubleSixes.setText(getString(R.string.double_sixes_label, viewModel.doubleSixes()));
+    tvDoubleOthers.setText(getString(R.string.double_others_label, viewModel.doubleOthers()));
   }
-
 }

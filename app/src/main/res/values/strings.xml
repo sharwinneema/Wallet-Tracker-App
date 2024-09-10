@@ -1,9 +1,25 @@
 <resources>
   <string name="app_name">Dice Games</string>
+
+  <!-- Coins -->
   <string name="coins_label">Coins: %1$d</string>
+
+  <!-- Previous Roll -->
   <string name="previous_roll_label">Previous Roll: %1$d</string>
-  <string name="stats_label">Sixes Rolled: %1$d    Total Dice Rolls: %2$d</string>
-  <string name="double_stats_label">Double Sixes: %1$d    Double Others: %2$d</string>
+
+  <!-- Single Sixes Rolled -->
+  <string name="sixes_rolled_label">Sixes Rolled: %1$d</string>
+
+  <!-- Total Dice Rolls -->
+  <string name="total_dice_rolled_label">Total Dice Rolls: %1$d</string>
+
+  <!-- Double Sixes -->
+  <string name="double_sixes_label">Double Sixes: %1$d</string>
+
+  <!-- Double Others -->
+  <string name="double_others_label">Double Others: %1$d</string>
+
+  <!-- Toast Messages -->
   <string name="congratulations">Congratulations! You earned coins!</string>
   <string name="loss_message">Oops! You lost some coins. Better luck next time!</string>
 </resources>

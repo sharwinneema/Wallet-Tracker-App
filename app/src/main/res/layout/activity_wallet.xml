@@ -89,7 +89,11 @@
       app:layout_constraintHorizontal_bias="0.5"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/tv_coins"
-      app:layout_constraintVertical_bias="0.123" />
+      app:layout_constraintVertical_bias="0.081" />
+
+  <!-- Sixes Rolled -->
+
+  <!-- Total Dice Rolls -->
 
   <TextView
       android:id="@+id/tv_previous_roll"
@@ -99,31 +103,61 @@
       android:text="Previous Roll: 4"
       android:textSize="16sp"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.498"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/tv_die_roll" />
 
   <TextView
-      android:id="@+id/tv_stats"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="28dp"
-      android:text="Sixes Rolled: 3    Total Dice Rolls: 11"
-      android:textSize="14sp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.502"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/tv_previous_roll" />
-
-  <TextView
-      android:id="@+id/tv_double_stats"
+      android:id="@+id/tv_sixes_rolled"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="16dp"
-      android:text="Double Sixes: 3    Double Others: 1"
+      android:text="Sixes Rolled: 3"
       android:textSize="14sp"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.474"
+      app:layout_constraintHorizontal_bias="0.165"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/tv_stats" />
+      app:layout_constraintTop_toBottomOf="@id/tv_previous_roll" />
+
+  <!-- Double Sixes -->
+
+  <TextView
+      android:id="@+id/tv_total_dice_rolled"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Total Dice Rolls: 11"
+      android:layout_marginTop="16dp"
+      android:textSize="14sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.721"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tv_previous_roll" />
+
+  <!-- Double Others -->
+
+  <TextView
+      android:id="@+id/tv_double_sixes"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:text="Double Sixes: 3"
+      android:textSize="14sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.168"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tv_sixes_rolled" />
+
+  <TextView
+      android:id="@+id/tv_double_others"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:text="Double Others: 1"
+      android:textSize="14sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.736"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tv_total_dice_rolled" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
