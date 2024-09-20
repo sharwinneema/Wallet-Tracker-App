@@ -22,4 +22,8 @@ public class Die6 implements Die {
     // TODO implement method
     return this.value;
   }
+
+  public void set_value(int val){
+      this.value=val;
+  }
 }

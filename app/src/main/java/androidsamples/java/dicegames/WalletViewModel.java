@@ -129,6 +129,17 @@ public class WalletViewModel extends ViewModel {
         this.previous_role=val;
     }
 
+
+    public void setBalance(int balance) {
+        // Update the balance in ViewModel
+        this.score = balance;
+    }
+
+    public void setDieValue(int value) {
+        // Update the die value in ViewModel
+        this.die.set_value(value);
+    }
+
     public boolean hasEarnedCoins() {
         boolean result = earnedCoins;
         earnedCoins = false; // Reset flag after checking
