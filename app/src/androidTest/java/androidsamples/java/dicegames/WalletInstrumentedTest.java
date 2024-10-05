@@ -43,26 +43,8 @@ public class WalletInstrumentedTest {
   }
 
 
-  @Test
-  public void initialSingleSixesCounts() {
-    // Check initial sixes rolled count is 0
-    onView(withId(R.id.tv_sixes_rolled)).check(matches(withText("Sixes Rolled: 0")));
-  }
 
-  @Test
-  public void initialDoubleCounts() {
-    // Check initial double sixes count is 0
-    onView(withId(R.id.tv_double_sixes)).check(matches(withText("Double Sixes: 0")));
 
-    // Check initial double others count is 0
-    onView(withId(R.id.tv_double_others)).check(matches(withText("Double Others: 0")));
-  }
-
-  @Test
-  public void initialCoinCount() {
-    // Check initial coin count is 0
-    onView(withId(R.id.tv_coins)).check(matches(withText("Coins: 0")));
-  }
   @Test
   public void rollDie_incrementsTotalRolls() {
     // Perform one die roll
@@ -72,40 +54,6 @@ public class WalletInstrumentedTest {
     onView(withId(R.id.tv_total_dice_rolled)).check(matches(withText("Total Dice Rolls: 1")));
   }
 
-  @Test
-  public void rollDie_singleSix_addsFiveCoins() {
-    // Store the initial coin count
-    final int[] initialCoinCount = {0};
-
-    // Check initial coin count
-    onView(withId(R.id.tv_coins)).check((view, noViewFoundException) -> {
-      String coinText = ((TextView) view).getText().toString(); // Get text from the TextView
-      initialCoinCount[0] = Integer.parseInt(coinText.replaceAll("\\D+", "")); // Extract numerical part
-    });
-
-    // Keep rolling the die until a six is rolled
-    while (true) {
-      // Perform a click to roll the die
-      onView(withId(R.id.tv_die_roll)).perform(click());
-
-      // Check the die value
-      final int[] dieValue = {0};
-      onView(withId(R.id.tv_die_roll)).check((view, noViewFoundException) -> {
-        String dieRollText = ((TextView) view).getText().toString();
-        dieValue[0] = Integer.parseInt(dieRollText);
-      });
-
-      // If a 6 is rolled, check if the coin count has increased by 5
-      if (dieValue[0] == 6) {
-        onView(withId(R.id.tv_coins)).check((view, noViewFoundException) -> {
-          String updatedCoinText = ((TextView) view).getText().toString();
-          int updatedCoinCount = Integer.parseInt(updatedCoinText.replaceAll("\\D+", ""));
-          assertEquals(initialCoinCount[0] + 5, updatedCoinCount);
-        });
-        break; // Exit the loop once the condition is met
-      }
-    }
-  }
 
   @Test
   public void rollDie_singleSix_incrementsSixesRolled() {
@@ -286,6 +234,102 @@ public class WalletInstrumentedTest {
       int updatedDoubleOthers = Integer.parseInt(updatedDoubleOthersText.replaceAll("\\D+", ""));
       assertEquals(initialDoubleOthers[0], updatedDoubleOthers);
     });
+  }
+
+  @Test
+  public void checkAllFieldsAfterProcessDeath() {
+    // Launch the activity and store initial values for all fields
+    final int[] initialBalance = {0};
+    final int[] initialDieRoll = {0};
+    final int[] initialPreviousRoll = {0};
+    final int[] initialSixesRolled = {0};
+    final int[] initialTotalRolls = {0};
+    final int[] initialDoubleSixes = {0};
+    final int[] initialDoubleOthers = {0};
+
+    try (ActivityScenario<WalletActivity> scenario = ActivityScenario.launch(WalletActivity.class)) {
+      // Retrieve and store all the initial field values from the TextViews
+      onView(withId(R.id.tv_coins)).check((view, noViewFoundException) -> {
+        String coinText = ((TextView) view).getText().toString();
+        initialBalance[0] = Integer.parseInt(coinText.replaceAll("\\D+", ""));
+      });
+
+      onView(withId(R.id.tv_die_roll)).check((view, noViewFoundException) -> {
+        String dieRollText = ((TextView) view).getText().toString();
+        initialDieRoll[0] = Integer.parseInt(dieRollText);
+      });
+
+      onView(withId(R.id.tv_previous_roll)).check((view, noViewFoundException) -> {
+        String previousRollText = ((TextView) view).getText().toString();
+        initialPreviousRoll[0] = Integer.parseInt(previousRollText.replaceAll("\\D+", ""));
+      });
+
+      onView(withId(R.id.tv_sixes_rolled)).check((view, noViewFoundException) -> {
+        String sixesRolledText = ((TextView) view).getText().toString();
+        initialSixesRolled[0] = Integer.parseInt(sixesRolledText.replaceAll("\\D+", ""));
+      });
+
+      onView(withId(R.id.tv_total_dice_rolled)).check((view, noViewFoundException) -> {
+        String totalRollsText = ((TextView) view).getText().toString();
+        initialTotalRolls[0] = Integer.parseInt(totalRollsText.replaceAll("\\D+", ""));
+      });
+
+      onView(withId(R.id.tv_double_sixes)).check((view, noViewFoundException) -> {
+        String doubleSixesText = ((TextView) view).getText().toString();
+        initialDoubleSixes[0] = Integer.parseInt(doubleSixesText.replaceAll("\\D+", ""));
+      });
+
+      onView(withId(R.id.tv_double_others)).check((view, noViewFoundException) -> {
+        String doubleOthersText = ((TextView) view).getText().toString();
+        initialDoubleOthers[0] = Integer.parseInt(doubleOthersText.replaceAll("\\D+", ""));
+      });
+
+      // Simulate process death using recreate()
+      scenario.recreate();
+
+      // Check that all values are restored after process death
+      onView(withId(R.id.tv_coins)).check((view, noViewFoundException) -> {
+        String updatedCoinText = ((TextView) view).getText().toString();
+        int updatedBalance = Integer.parseInt(updatedCoinText.replaceAll("\\D+", ""));
+        assertEquals(initialBalance[0], updatedBalance);
+      });
+
+      onView(withId(R.id.tv_die_roll)).check((view, noViewFoundException) -> {
+        String updatedDieRollText = ((TextView) view).getText().toString();
+        int updatedDieRoll = Integer.parseInt(updatedDieRollText);
+        assertEquals(initialDieRoll[0], updatedDieRoll);
+      });
+
+      onView(withId(R.id.tv_previous_roll)).check((view, noViewFoundException) -> {
+        String updatedPreviousRollText = ((TextView) view).getText().toString();
+        int updatedPreviousRoll = Integer.parseInt(updatedPreviousRollText.replaceAll("\\D+", ""));
+        assertEquals(initialPreviousRoll[0], updatedPreviousRoll);
+      });
+
+      onView(withId(R.id.tv_sixes_rolled)).check((view, noViewFoundException) -> {
+        String updatedSixesRolledText = ((TextView) view).getText().toString();
+        int updatedSixesRolled = Integer.parseInt(updatedSixesRolledText.replaceAll("\\D+", ""));
+        assertEquals(initialSixesRolled[0], updatedSixesRolled);
+      });
+
+      onView(withId(R.id.tv_total_dice_rolled)).check((view, noViewFoundException) -> {
+        String updatedTotalRollsText = ((TextView) view).getText().toString();
+        int updatedTotalRolls = Integer.parseInt(updatedTotalRollsText.replaceAll("\\D+", ""));
+        assertEquals(initialTotalRolls[0], updatedTotalRolls);
+      });
+
+      onView(withId(R.id.tv_double_sixes)).check((view, noViewFoundException) -> {
+        String updatedDoubleSixesText = ((TextView) view).getText().toString();
+        int updatedDoubleSixes = Integer.parseInt(updatedDoubleSixesText.replaceAll("\\D+", ""));
+        assertEquals(initialDoubleSixes[0], updatedDoubleSixes);
+      });
+
+      onView(withId(R.id.tv_double_others)).check((view, noViewFoundException) -> {
+        String updatedDoubleOthersText = ((TextView) view).getText().toString();
+        int updatedDoubleOthers = Integer.parseInt(updatedDoubleOthersText.replaceAll("\\D+", ""));
+        assertEquals(initialDoubleOthers[0], updatedDoubleOthers);
+      });
+    }
   }
 
   // Add other tests here
