@@ -1,6 +1,7 @@
 package androidsamples.java.dicegames;
 
 import androidx.lifecycle.ViewModel;
+import java.util.Vector;
 
 public class WalletViewModel extends ViewModel {
 
@@ -16,8 +17,10 @@ public class WalletViewModel extends ViewModel {
   private int total_roles;
   private boolean earnedCoins;
   private boolean lostCoin;
+  private Vector<Integer> v;
 
-  public WalletViewModel() {
+
+    public WalletViewModel() {
       this.score=0;
       this.number_of_double_others=0;
       this.number_of_double_sixes=0;
@@ -27,6 +30,7 @@ public class WalletViewModel extends ViewModel {
       this.total_roles=totalRolls();
       this.earnedCoins=false;
       this.lostCoin=false;
+      this.v= new Vector<>();
   }
 
   /**
@@ -41,8 +45,10 @@ public class WalletViewModel extends ViewModel {
    * Rolls the {@link Die} in the wallet and implements the changes accordingly.
    */
   public void rollDie() {
+//      this.previous_role=this.dieValue();
       die.roll();
       int currentRoll=this.die.value();
+      v.add(currentRoll);
       total_roles++;
       if (currentRoll == 6) {
         this.lostCoin=false;

@@ -25,6 +25,7 @@ public class WalletActivity extends AppCompatActivity {
   private static final String TAG = "WalletActivity";
   private static final String KEY_BALANCE = "balance";
   private static final String KEY_DIE_VALUE = "die_value";
+  private static final String PREV = "previous_value";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class WalletActivity extends AppCompatActivity {
 
     // Initialize ViewModel
     viewModel = new ViewModelProvider(this).get(WalletViewModel.class);
-
+    Log.d(PREV, " Earlier: Previous Roll: " + viewModel.previousRoll());
     // Bind UI elements
     tvCoins = findViewById(R.id.tv_coins);
     tvDieRoll = findViewById(R.id.tv_die_roll);
@@ -44,12 +45,14 @@ public class WalletActivity extends AppCompatActivity {
     tvDoubleOthers = findViewById(R.id.tv_double_others);
 
     // Check if there's saved state
-    if (savedInstanceState != null) {
-      int savedBalance = savedInstanceState.getInt(KEY_BALANCE, 0);
-      int savedDieValue = savedInstanceState.getInt(KEY_DIE_VALUE, 1);
-      viewModel.setBalance(savedBalance);
-      viewModel.setDieValue(savedDieValue);
-    }
+//    if (savedInstanceState != null) {
+//      int savedBalance = savedInstanceState.getInt(KEY_BALANCE, 0);
+//      int savedDieValue = savedInstanceState.getInt(KEY_DIE_VALUE, 1);
+//      viewModel.setBalance(savedBalance);
+//      viewModel.setDieValue(savedDieValue);
+//      Log.d(PREV, "Previous Roll: " + viewModel.previousRoll());
+//
+//    }
 
     // Set initial values for UI from ViewModel
     updateUI();
@@ -108,15 +111,15 @@ public class WalletActivity extends AppCompatActivity {
     tvDoubleOthers.setContentDescription("Number of Double Other Numbers Rolled: " + viewModel.doubleOthers());
   }
 
-  @Override
-  protected void onSaveInstanceState(@NonNull Bundle outState) {
-    super.onSaveInstanceState(outState);
-    Log.d(TAG, "onSaveInstanceState");
-
-    // Save balance and die value to outState
-    outState.putInt(KEY_BALANCE, viewModel.balance());
-    outState.putInt(KEY_DIE_VALUE, viewModel.dieValue());
-
-    Log.d(TAG, "Saved: balance = " + viewModel.balance() + ", die = " + viewModel.dieValue());
-  }
+//  @Override
+//  protected void onSaveInstanceState(@NonNull Bundle outState) {
+//    super.onSaveInstanceState(outState);
+//    Log.d(TAG, "onSaveInstanceState");
+//
+//    // Save balance and die value to outState
+//    outState.putInt(KEY_BALANCE, viewModel.balance());
+//    outState.putInt(KEY_DIE_VALUE, viewModel.dieValue());
+//
+//    Log.d(KEY_BALANCE, "Saved: balance = " + viewModel.balance() + ", die = " + viewModel.dieValue());
+//  }
 }
