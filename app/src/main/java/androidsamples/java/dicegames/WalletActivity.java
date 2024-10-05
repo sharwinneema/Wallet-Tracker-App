@@ -1,5 +1,7 @@
 package androidsamples.java.dicegames;
 
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -44,15 +46,6 @@ public class WalletActivity extends AppCompatActivity {
     tvDoubleSixes = findViewById(R.id.tv_double_sixes);
     tvDoubleOthers = findViewById(R.id.tv_double_others);
 
-    // Check if there's saved state
-//    if (savedInstanceState != null) {
-//      int savedBalance = savedInstanceState.getInt(KEY_BALANCE, 0);
-//      int savedDieValue = savedInstanceState.getInt(KEY_DIE_VALUE, 1);
-//      viewModel.setBalance(savedBalance);
-//      viewModel.setDieValue(savedDieValue);
-//      Log.d(PREV, "Previous Roll: " + viewModel.previousRoll());
-//
-//    }
 
     // Set initial values for UI from ViewModel
     updateUI();
@@ -70,6 +63,8 @@ public class WalletActivity extends AppCompatActivity {
       }
     });
   }
+
+
 
   /**
    * Updates all UI elements with the latest data from the ViewModel.
@@ -110,16 +105,38 @@ public class WalletActivity extends AppCompatActivity {
     tvDoubleOthers.setText(doubleOthersText);
     tvDoubleOthers.setContentDescription("Number of Double Other Numbers Rolled: " + viewModel.doubleOthers());
   }
+  @Override
+  public void onPause() {
+    super.onPause();
+    Log.d(TAG, "onPause");
+    // Save all stats to SharedPreferences
+    DiceGamesPrefs.setBalance(this, viewModel.balance());
+    DiceGamesPrefs.setDieValue(this, viewModel.dieValue());
+    DiceGamesPrefs.setPreviousRoll(this, viewModel.previousRoll());
+    DiceGamesPrefs.setSixesRolled(this, viewModel.singleSixes());
+    DiceGamesPrefs.setTotalRolls(this, viewModel.totalRolls());
+    DiceGamesPrefs.setDoubleSixes(this, viewModel.doubleSixes());
+    DiceGamesPrefs.setDoubleOthers(this, viewModel.doubleOthers());
+  }
 
-//  @Override
-//  protected void onSaveInstanceState(@NonNull Bundle outState) {
-//    super.onSaveInstanceState(outState);
-//    Log.d(TAG, "onSaveInstanceState");
-//
-//    // Save balance and die value to outState
-//    outState.putInt(KEY_BALANCE, viewModel.balance());
-//    outState.putInt(KEY_DIE_VALUE, viewModel.dieValue());
-//
-//    Log.d(KEY_BALANCE, "Saved: balance = " + viewModel.balance() + ", die = " + viewModel.dieValue());
-//  }
+  @Override
+  public void onResume() {
+    super.onResume();
+    Log.d(TAG, "onResume");
+
+    // Retrieve stats from SharedPreferences and update ViewModel
+    viewModel.setBalance(DiceGamesPrefs.getBalance(this));
+    viewModel.setDieValue(DiceGamesPrefs.getDieValue(this));
+    viewModel.setpreviosRoll(DiceGamesPrefs.getPreviousRoll(this));
+    viewModel.setSixesRolled(DiceGamesPrefs.getSixesRolled(this));
+    viewModel.setTotalRolls(DiceGamesPrefs.getTotalRolls(this));
+    viewModel.setDoubleSixes(DiceGamesPrefs.getDoubleSixes(this));
+    viewModel.setDoubleOthers(DiceGamesPrefs.getDoubleOthers(this));
+
+    // Update the UI with the restored data
+    updateUI();
+  }
+
 }
+
+

@@ -158,4 +158,19 @@ public class WalletViewModel extends ViewModel {
     }
 
 
+    public void setSixesRolled(int sixesRolled) {
+        this.number_of_sixes=sixesRolled;
+    }
+
+    public void setTotalRolls(int totalRolls) {
+        this.total_roles=totalRolls;
+  }
+
+    public void setDoubleSixes(int doubleSixes) {
+        this.number_of_double_sixes=doubleSixes;
+  }
+
+    public void setDoubleOthers(int doubleOthers) {
+        this.number_of_double_others=doubleOthers;
+  }
 }
