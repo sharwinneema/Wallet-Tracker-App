@@ -15,7 +15,7 @@
       android:layout_marginTop="100dp"
       android:layout_marginEnd="16dp"
       android:contentDescription="Instructions: Click the die to roll. Earn 5 coins for every six rolled."
-      android:text="Click the die to roll! \n. You earn 5 coins every time you roll a six!"
+      android:text="Click the die to roll! \nYou earn 5 coins every time you roll a six!"
       android:textAlignment="center"
       android:textColor="#014504"
       android:textSize="16sp"
@@ -79,6 +79,8 @@
       android:text="4"
       android:textColor="#FFFFFF"
       android:textSize="60sp"
+      android:minWidth="130dp"
+      android:minHeight="120dp"
       android:contentDescription="Current Die Roll: 4"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
@@ -130,7 +132,6 @@
       app:layout_constraintTop_toBottomOf="@id/tv_previous_roll" />
 
   <!-- Double Sixes and Double Others on the same line -->
-
   <TextView
       android:id="@+id/tv_double_sixes"
       android:layout_width="wrap_content"
